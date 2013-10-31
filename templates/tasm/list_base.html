@@ -1,0 +1,26 @@
+{% extends 'tasm/base.html' %}
+{% load pagination_tags tasm_tags %}
+{% block content %}
+    {% if form %}
+    <div class="span12">
+        {% block filters %}
+            {{ filters }}
+        {% endblock %}
+        <form class="form-inline" action="." method="GET">
+            <fieldset>
+                {% for field in form %}{{ field }} {% endfor %}
+                <button type="submit" class="btn btn-info">Filter</button>
+                <button type="submit" class="btn" value="_clear">Clear</button>
+            </fieldset>
+        </form>
+    </div>
+    {% endif %}
+    <div class="span12">
+        {% autopaginate object_list 20 %}
+        {% paginate %}
+        {% block list_head %}{% endblock %}
+        {% block list_body %}{% endblock %}
+        {% paginate %}
+    </div>
+    <hr class="soften"/>
+{% endblock %}

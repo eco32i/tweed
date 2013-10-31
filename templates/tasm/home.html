@@ -1,0 +1,36 @@
+{% extends 'tasm/base.html' %}
+{% block content %}
+<div class="hero-unit">
+    <h1>{{ object_list.count }} assemblies</h1>
+    <hr class="soften"/>
+    {% for asm in object_list %}
+        <div class="row-fluid">
+            <div class="span4">
+                <h2><a href="{% url 'tasm_loci_for_asm_view' asm_pk=asm.pk %}">{{ asm.identifier }}</a></h2>
+                <p>Assembly for <em>{{ asm.species }}</em></p>
+                <p>k<sub>min</sub>={{ asm.k_min }}; k<sub>max</sub>={{ asm.k_max }}</p>
+            </div>
+            <div class="span8">
+                <dl class="dl-horizontal">
+                    <dt><a href="{% url 'tasm_transcripts_for_asm_view' asm_pk=asm.pk %}">Transcripts</a></dt>
+                    <dd>{{ asm.num_transcripts }}</dd>
+                    <dt><a href="{% url 'tasm_loci_for_asm_view' asm_pk=asm.pk %}">Loci</a></dt>
+                    <dd>{{ asm.num_loci }}</dd>
+                    <dt><a href="{% url 'tasm_refseqs_for_asm_view' asm_pk=asm.pk %}">BLAST hits</a></dt>
+                    <dd>{{ asm.num_hits }}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr class="soften"/>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block footer %}
+    <dl class="dl-horizontal">
+    {% for key,val in stat.items %}
+        <dt>{{ key }}</dt>
+        <dd>{{ val }}</dd>
+    {% endfor %}
+    </dl>
+{% endblock %}
+

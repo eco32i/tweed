@@ -1,0 +1,10 @@
+-e git://github.com/django/django.git@e3ee472fbc6edbb9d1600bfa284a8063b53ac48c#egg=Django-dev
+MySQL-python==1.2.4
+argparse==1.2.1
+biopython==1.60
+django-pagination==1.0.7
+-e git://github.com/alex/django-taggit.git@91791c87a99dc20a69174a958a388b10e4573860#egg=django_taggit-dev
+monoseq==1.1.1
+numpy==1.6.2
+scipy==0.11.0
+wsgiref==0.1.2

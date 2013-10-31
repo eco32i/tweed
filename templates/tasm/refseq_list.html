@@ -1,0 +1,13 @@
+{% extends 'tasm/list_base.html' %}
+
+{% block list_thead %}
+    <th>Accession</th>
+    <th>Definition</th>
+    <th>Length</th>
+{% endblock %}
+
+{% block list_tbody %}
+    {% for refseq in object_list %}
+        {% include 'tasm/includes/refseq.html' %}
+    {% endfor %}
+{% endblock %}

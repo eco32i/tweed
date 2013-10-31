@@ -1,0 +1,10 @@
+{% load tasm_tags %}
+<tr>
+    <td>{{ transcript.locus }}</td>
+    <td>{{ transcript.transcript_id }} of {{ transcript.locus.transcript_set.count }}</td>
+    <td class="sequence">{{ transcript.sequence }}</td>
+    <td>{{ transcript.confidence }}</td>
+    <td>{{ transcript.length }}</td>
+    <td>{{ transcript.coverage }}</td>
+    <td>{% for hit in transcript.blast_hits.all %}{% blast_hit_link hit %}{% endfor %}</td>
+</tr>

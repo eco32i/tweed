@@ -1,0 +1,7 @@
+{% load tasm_tags %}
+<tr>
+    <td>{{ locus.locus_id }}</td>
+    <td>{{ locus.transcript_set.count }}</td>
+    <td>{{ locus|best_length }}</td>
+    <td>{{ locus|best_coverage }}</td>
+</tr>

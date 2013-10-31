@@ -1,0 +1,14 @@
+{% extends 'tasm/list_base.html' %}
+{% load tasm_tags %}
+{% block filters %}
+    <dl class="dl-horizontal">
+    {% for filter,value in filters.items %}
+        <dt>{{ filter|transcript_filter }}</dt><dd>{{ value }}</dd>
+    {% endfor %}
+    </dl>
+{% endblock %}
+{% block list_body %}
+    {% for transcript in object_list %}
+        {% include 'tasm/includes/transcript-div.html' %}
+    {% endfor %}
+{% endblock %}

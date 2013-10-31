@@ -1,0 +1,6 @@
+{% load tasm_tags %}
+<tr>
+    <td><a href="{% url 'tasm_refseq_view' accession=refseq.accession %}">Hits</a> | <a href="{{ refseq.url }}">{{ refseq.accession }}</a></td>
+    <td>{{ refseq.definition }}</td>
+    <td>{{ refseq.length }}</td>
+</tr>

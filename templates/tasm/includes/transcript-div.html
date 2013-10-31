@@ -1,0 +1,13 @@
+{% load tasm_tags %}
+<div class="span8">
+    <h4>Locus {{ transcript.locus.locus_id }} <span class="muted">Transcript {{ transcript.transcript_id }} of {{ transcript.locus.transcript_set.count }}</span></h4>
+    <div class="sequence"><pre>{{ transcript.sequence|pretty_seq|linebreaks }}</pre></div>
+    <ul class="inline">
+        <li><span class="muted">Confidence:</span>{{ transcript.confidence }}</li>
+        <li><span class="muted">Length:</span>{{ transcript.length }}</li>
+        <li><span class="muted">Coverage:</span>{{ transcript.coverage }}</li>
+    </ul>
+    <h5>BLAST hits</h5>
+    <p>{% for hit in transcript.blast_hits.all %}{% blast_hit_link hit %}{% endfor %}</p>
+    <hr class="soften">
+</div>

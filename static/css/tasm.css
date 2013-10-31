@@ -1,0 +1,41 @@
+/* ---------------------------------------------------------------------
+ * Tasm specific css
+ */
+
+body { padding-top: 60px; }
+
+
+div .sequence {
+  font-family: monospace;
+  word-wrap: break-word;
+}
+
+.monoseq-margin {
+  font-weight: bold;
+}
+
+table td.sequence, th.sequence {
+  max-width: 350px;
+  word-wrap: break-word;
+}
+
+table td.sequence {
+  font-family: monospace;
+}
+
+table.table thead .sorting,
+table.table thead .sorting-asc,
+table.table thead .sorting-desc {
+    cursor: pointer;
+    *cursor: hand;
+}
+ 
+table.table thead .sorting { background: url('../img/arrow-up.gif') no-repeat center right; }
+table.table thead .sorting-asc {
+  background: #eee8d5 url('../img/arrow-up.gif') no-repeat center right;
+  border-bottom: solid 4px #93a1a1;
+}
+table.table thead .sorting-desc {
+  background: #eee8d5 url('../img/arrow-down.gif') no-repeat center right;
+  border-bottom: solid 4px #93a1a1;
+}

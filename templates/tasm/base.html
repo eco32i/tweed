@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}TWeeD{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/tasm.css" />
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
+        {% block extrastyle %}{% endblock %}
+    </head>
+
+    <body class="{% block bodyclass %}{% endblock %}">
+        <!-- Navbar -->
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="{% url 'tasm_home_view' %}">TWeeD</a>
+                    <ul class="nav">
+                        <li>
+                            <a href="{% url 'tasm_refseq_list_view' %}">BLAST hits</a>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <a href="{% url 'admin:index' %}">Admin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar -->
+        {% block breadcrumbs %}{% endblock %}
+        <!-- Container -->
+        <div class="container">
+            <!-- Content -->
+            {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+            {% block content %}{% endblock %}
+            
+            <!-- END Content -->
+        </div>
+        <!-- END Container -->
+        <footer class="footer">
+            {% block footer %}{% endblock %}
+        </footer>
+    </body>
+
+</html>
