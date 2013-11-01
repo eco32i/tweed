@@ -1,20 +1,6 @@
 from django.db import models
 from django.db.models import Min, Max
 
-# Database to store and analyze the results of oases de novo
-# assembly pipeline. The database is built by parsing the following 
-# files from oases output:
-#   - stats.txt
-#   - contig-ordering.txt
-#   - transcripts.fa
-#
-# The resulting transcripts are annotated with coverage informations
-# computed as geometric mean of the nodes covering the tranascript.
-#
-# TODO:
-#   - views: by assembly, by locus, best transcript in locus
-#   - blast annotations for transcripts
-
 BASE_REFSEQ_URL = 'http://www.ncbi.nlm.nih.gov/nuccore/'
 
 class Assembly(models.Model):

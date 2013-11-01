@@ -1,7 +1,7 @@
-{% load tasm_tags %}
+{% load tasm_tags humanize %}
 <tr>
     <td>{{ locus.locus_id }}</td>
     <td>{{ locus.transcript_set.count }}</td>
-    <td>{{ locus|best_length }}</td>
-    <td>{{ locus|best_coverage }}</td>
+    <td>{{ locus|best_length|intcomma }}</td>
+    <td>{{ locus|best_coverage|floatformat:3 }}</td>
 </tr>

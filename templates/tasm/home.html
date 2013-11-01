@@ -1,4 +1,5 @@
 {% extends 'tasm/base.html' %}
+{% load humanize %}
 {% block content %}
 <div class="hero-unit">
     <h1>{{ object_list.count }} assemblies</h1>
@@ -13,11 +14,11 @@
             <div class="span8">
                 <dl class="dl-horizontal">
                     <dt><a href="{% url 'tasm_transcripts_for_asm_view' asm_pk=asm.pk %}">Transcripts</a></dt>
-                    <dd>{{ asm.num_transcripts }}</dd>
+                    <dd>{{ asm.num_transcripts|intcomma }}</dd>
                     <dt><a href="{% url 'tasm_loci_for_asm_view' asm_pk=asm.pk %}">Loci</a></dt>
-                    <dd>{{ asm.num_loci }}</dd>
+                    <dd>{{ asm.num_loci|intcomma }}</dd>
                     <dt><a href="{% url 'tasm_refseqs_for_asm_view' asm_pk=asm.pk %}">BLAST hits</a></dt>
-                    <dd>{{ asm.num_hits }}</dd>
+                    <dd>{{ asm.num_hits|intcomma }}</dd>
                 </dl>
             </div>
         </div>
@@ -29,7 +30,7 @@
     <dl class="dl-horizontal">
     {% for key,val in stat.items %}
         <dt>{{ key }}</dt>
-        <dd>{{ val }}</dd>
+        <dd>{{ val|intcomma }}</dd>
     {% endfor %}
     </dl>
 {% endblock %}
