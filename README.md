@@ -1,7 +1,7 @@
 tweed
 =====
 
-Database to store and analyze the results of oases de novo
+A database to store and analyze the results of oases de novo
 assembly pipeline. The database is built by parsing the following 
 files from the standard ``oases`` output:
 
