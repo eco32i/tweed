@@ -2,8 +2,8 @@ tweed
 =====
 
 A database to store and analyze the results of oases de novo
-assembly pipeline. The database is built by parsing the following 
-files from the standard ``oases`` output:
+assembly pipeline. Inspired by [oases2csv](https://code.google.com/p/oases-to-csv/wiki/oases2csvwiki). 
+The database is built by parsing the following files from the standard ``oases`` output:
 
    - stats.txt
    - contig-ordering.txt
@@ -17,14 +17,14 @@ resulting .xml output file can be imported to annotate transcripts that
 produced blast hits.
 
 Dependencies
-===========
+============
 
-    - django
-    - django-pagination
-    - gunicorn
-    - scipy
-    - monoseq
-    - biopython
+- [django](http://www.djangoproject.com)
+- [django-pagination](https://github.com/ericflo/django-pagination.git)
+- [gunicorn](http://gunicorn.org)
+- [scipy](http://www.scipy.org/)
+- [monoseq](https://github.com/martijnvermaat/monoseq)
+- [biopython](http://biopython.org)
  
 TODO
 ====
