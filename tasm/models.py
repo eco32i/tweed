@@ -139,7 +139,7 @@ class TranscriptManager(models.Manager):
         elif isinstance(loc, str):
             return self.get_query_set().filter(locus__pk=int(loc))
             
-    def best_for_locus(self, loc, percent_cutoff=15):
+    def best_for_locus(self, loc, percent_cutoff=80):
         qs = self.for_locus(loc)
         loc_data = qs.aggregate(Min('length'), Max('length'))
         return qs.filter(length__gt=loc_data['length__min'] * percent_cutoff / 100)[0]
