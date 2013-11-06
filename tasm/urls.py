@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 
 from tasm import views, plotting
@@ -35,15 +34,17 @@ urlpatterns = patterns('',
     url(r'^asm/(?P<asm_pk>\d+)/transcripts/$', views.FilteredListView.as_view(
         model=Transcript,
         template_name='tasm/trasncript_list.html',
-        form_class=TranscriptFilterForm
+        form_class=TranscriptFilterForm,
+        view_name='tasm_transcripts_for_asm_view'
         ), name='tasm_transcripts_for_asm_view'),
     url(r'^asm/(?P<asm_pk>\d+)/hits/$', views.FilteredListView.as_view(
         model=RefSeq,
         template_name='tasm/refseq_list.html',
         form_class=RefSeqFilterForm
         ), name='tasm_refseqs_for_asm_view'),
-    url(r'^asm/(?P<asm_pk>\d+)/plots/$', TemplateView.as_view(
+    url(r'^asm/(?P<asm_pk>\d+)/plots/$', views.TranscriptPlotView.as_view(
         template_name='tasm/plots.html',
+        view_name='tasm_transcripts_plots_view'
         ), name='tasm_transcript_plots_view'),
 
     url(r'^loci/(?P<pk>\d+)/$', DetailView.as_view(

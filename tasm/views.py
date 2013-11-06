@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import Count
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import BaseFormView
 from django.utils.encoding import smart_str
@@ -33,9 +34,19 @@ class HomeView(ListView):
         context['stat'] = stat_dict
         return context
 
-
+class TranscriptPlotView(TemplateView):
+    view_name = None
+    
+    def get_context_data(self, **kwargs):
+        context = super(TranscriptPlotView, self).get_context_data(**kwargs)
+        context['active_view'] = self.view_name
+        context['assembly'] = get_object_or_404(Assembly, pk=self.kwargs['asm_pk'])
+        return context
+    
+    
 class FilteredListView(ListView):
     form_class = None
+    view_name = None
     
     def __init__(self, *args, **kwargs):
         super(FilteredListView, self).__init__(**kwargs)

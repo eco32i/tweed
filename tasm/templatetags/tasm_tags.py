@@ -1,4 +1,5 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.template.context import Context
 from django.utils.safestring import mark_safe
 from django.utils.http import urlencode
@@ -19,8 +20,31 @@ def transcript_filter(key):
         bits[-1] = '<'
     return ' '.join(bits)
 transcript_filter.is_safe = True
-        
     
+    
+@register.simple_tag(takes_context=True)
+def render_tabs(context, active):
+    tab_views = (
+        ('tasm_transcripts_for_asm_view', 'Transcripts'),
+        ('tasm_transcript_plots_view', 'Plots'),
+        )
+    tab_item_tpl = '<li{css}><a href="{url}">{text}</a></li>'
+    lines = []
+    for view,text in tab_views:
+        if view == active:
+            url = '#'
+            css = ' class="active"'
+        else:
+            url = reverse(view, kwargs=dict(asm_pk=int(context['view'].kwargs['asm_pk'])))
+            css = ''
+        lines.append(tab_item_tpl.format(
+            css=css,
+            url=url,
+            text=text)
+            )
+    return ''.join(lines)
+
+
 @register.filter(needs_autoescape=True)
 def pretty_seq(seq, autoescape=None):
     # This is how it's done in the docs but this ain't working

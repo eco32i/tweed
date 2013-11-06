@@ -7,10 +7,10 @@
     {% endfor %}
     </dl>
 {% endblock %}
-{% block plots %}
-    <img src="{% url 'tasm_transcripts_plot_for_asm_view' asm_pk=view.kwargs.asm_pk %}" alt="Loading..."/>
-{% endblock %}
 {% block list_body %}
+    <ul class="nav nav-tabs">
+        {% render_tabs active_view %}
+    </ul>
     {% for transcript in object_list %}
         {% include 'tasm/includes/transcript-div.html' %}
     {% endfor %}
