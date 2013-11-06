@@ -1,0 +1,12 @@
+{% extends 'tasm/base.html' %}
+{% load tasm_tags %}
+{% block content %}
+    <div class="span12">
+        <ul class="nav nav-tabs">
+            {% render_tabs active_view %}
+        </ul>
+        <h2>Plots for {{ assembly }}</h2>
+        <img src="{% url 'tasm_transcripts_plot_for_asm_view' asm_pk=view.kwargs.asm_pk %}" alt="Loading..."/>
+    </div>
+    <hr class="soften"/>
+{% endblock %}
