@@ -16,6 +16,7 @@
     </div>
     {% endif %}
     <div class="span12">
+        {% block plots %}{% endblock %}
         {% autopaginate object_list 20 %}
         {% paginate %}
         {% block list_head %}{% endblock %}

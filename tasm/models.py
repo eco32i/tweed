@@ -1,3 +1,4 @@
+from __future__ import division
 from django.db import models
 from django.db.models import Min, Max
 
@@ -113,6 +114,19 @@ class RefSeq(models.Model):
 
 class TranscriptManager(models.Manager):
     
+    def for_asm(self, asm):
+        return self.get_queryset().filter(locus__assembly=asm)
+        
+    def best_for_asm(self, asm):
+        '''
+        Returns a queryset containing the best transcript for every locus
+        for the given assembly.
+        '''
+        pks = []
+        for loc in asm.locus_set.all():
+            pks.append(self.best_for_locus(loc).pk)
+        return self.get_queryset().filter(pk__in=pks)
+    
     def for_locus(self, loc):
         '''
         Gets a set of transcripts for the given locus (as instance, pk, 
@@ -127,12 +141,15 @@ class TranscriptManager(models.Manager):
             
     def best_for_locus(self, loc, percent_cutoff=15):
         qs = self.for_locus(loc)
-        if qs.count() > 6:
-            loc_data = qs.aggregate(Min('length'), Max('length'))
-            cutoff = loc_data['length__min'] + (loc_data['length__max'] - loc_data['length__min']) / 100 * percent_cutoff
-            return qs.filter(length__gt=cutoff).order_by('-coverage')[0]
-        else:
-            return qs.order_by('-coverage')[0]
+        loc_data = qs.aggregate(Min('length'), Max('length'))
+        return qs.filter(length__gt=loc_data['length__min'] * percent_cutoff / 100)[0]
+        
+        #~ if qs.count() > 6:
+            #~ loc_data = qs.aggregate(Min('length'), Max('length'))
+            #~ cutoff = loc_data['length__min'] + (loc_data['length__max'] - loc_data['length__min']) / 100 * percent_cutoff
+            #~ return qs.filter(length__gt=cutoff).order_by('-coverage')[0]
+        #~ else:
+            #~ return qs.order_by('-coverage')[0]
 
 
 class Transcript(models.Model):

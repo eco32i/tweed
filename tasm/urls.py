@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 
-from tasm import views
+from tasm import views, plotting
 from tasm.models import RefSeq, Locus, Transcript
 from tasm.forms import TranscriptFilterForm, RefSeqFilterForm
 
@@ -41,7 +42,10 @@ urlpatterns = patterns('',
         template_name='tasm/refseq_list.html',
         form_class=RefSeqFilterForm
         ), name='tasm_refseqs_for_asm_view'),
-        
+    url(r'^asm/(?P<asm_pk>\d+)/plots/$', TemplateView.as_view(
+        template_name='tasm/plots.html',
+        ), name='tasm_transcript_plots_view'),
+
     url(r'^loci/(?P<pk>\d+)/$', DetailView.as_view(
         model=Locus,
         template_name='tasm/locus.html',
@@ -56,4 +60,7 @@ urlpatterns = patterns('',
         model=Transcript,
         template_name='tasm/transcript_list.html',
         context_object_name='locus'), name='tasm_transcript_view'),
+        
+    url(r'^asm/(?P<asm_pk>\d+)/plot/$', plotting.TranscriptPlotView.as_view(),
+        name='tasm_transcripts_plot_for_asm_view'),
 )
