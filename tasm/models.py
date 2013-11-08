@@ -142,7 +142,8 @@ class TranscriptManager(models.Manager):
     def best_for_locus(self, loc, percent_cutoff=80):
         qs = self.for_locus(loc)
         loc_data = qs.aggregate(Min('length'), Max('length'))
-        return qs.filter(length__gt=loc_data['length__min'] * percent_cutoff / 100)[0]
+        return qs.filter(
+            length__gt=loc_data['length__max'] * percent_cutoff / 100).order_by('-coverage')[0]
         
         #~ if qs.count() > 6:
             #~ loc_data = qs.aggregate(Min('length'), Max('length'))

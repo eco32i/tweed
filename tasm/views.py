@@ -100,6 +100,7 @@ class FilteredListView(ListView):
     
     def get_context_data(self,  **kwargs):
         context = super(FilteredListView, self).get_context_data(**kwargs)
+        context['active_view'] = self.view_name
         if self.form_class:
             context.update({'form': self.form_class(),})
         if self.filters:

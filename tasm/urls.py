@@ -44,7 +44,7 @@ urlpatterns = patterns('',
         ), name='tasm_refseqs_for_asm_view'),
     url(r'^asm/(?P<asm_pk>\d+)/plots/$', views.TranscriptPlotView.as_view(
         template_name='tasm/plots.html',
-        view_name='tasm_transcripts_plots_view'
+        view_name='tasm_transcript_plots_view'
         ), name='tasm_transcript_plots_view'),
 
     url(r'^loci/(?P<pk>\d+)/$', DetailView.as_view(

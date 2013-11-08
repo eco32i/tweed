@@ -120,7 +120,10 @@ class TranscriptPlotView(ListView, PlotMixin):
             ax.set_xlabel('Normalized {0}'.format(col))
             ax.set_ylabel('Frequency')
             rstyle(ax)
-            
+        
+        import matplotlib
+        matplotlib.use('Agg')
+        
         fig = plt.figure(figsize=(6,18))
         fig.patch.set_alpha(0)
         ax = fig.add_subplot(311)
