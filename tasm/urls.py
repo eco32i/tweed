@@ -37,6 +37,18 @@ urlpatterns = patterns('',
         form_class=TranscriptFilterForm,
         view_name='tasm_transcripts_for_asm_view'
         ), name='tasm_transcripts_for_asm_view'),
+    
+    url(r'^asm/(?P<asm_pk>\d+)/best/$', views.BestTranscriptsView.as_view(
+        template_name='tasm/trasncript_list.html',
+        form_class=TranscriptFilterForm,
+        view_name='tasm_best_transcripts_for_asm_view'
+        ), name='tasm_best_transcripts_for_asm_view'),
+    url(r'^asm/(?P<asm_pk>\d+)/orphans/$', views.BestOrphansView.as_view(
+        template_name='tasm/trasncript_list.html',
+        form_class=TranscriptFilterForm,
+        view_name='tasm_orphan_transcripts_for_asm_view'
+        ), name='tasm_orphan_transcripts_for_asm_view'),
+
     url(r'^asm/(?P<asm_pk>\d+)/hits/$', views.FilteredListView.as_view(
         model=RefSeq,
         template_name='tasm/refseq_list.html',

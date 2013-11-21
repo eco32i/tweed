@@ -20,6 +20,8 @@
                     <dt><a href="{% url 'tasm_refseqs_for_asm_view' asm_pk=asm.pk %}">BLAST hits</a></dt>
                     <dd>{{ asm.num_hits|intcomma }}</dd>
                 </dl>
+                <p><a href="{% url 'tasm_best_transcripts_for_asm_view' asm_pk=asm.pk %}">Best Transcripts</a></p>
+                <p><a href="{% url 'tasm_orphan_transcripts_for_asm_view' asm_pk=asm.pk %}">Best Orphan Transcripts</a></p>
             </div>
         </div>
         <hr class="soften"/>

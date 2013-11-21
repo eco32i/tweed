@@ -117,3 +117,16 @@ class FilteredListView(ListView):
             self.filters.update(filters)
             #self.ordering = self._get_ordering(request)
         return super(FilteredListView, self).get(request, *args, **kwargs)
+
+class BestTranscriptsView(FilteredListView):
+    model = Transcript
+
+    def get_queryset(self):
+        asm = Assembly.objects.get(pk=int(self.kwargs['asm_pk']))
+        return self.model._default_manager.best_for_asm(asm).filter(**self.filters).distinct().order_by('-coverage')
+
+class BestOrphansView(BestTranscriptsView):
+
+    def get_queryset(self):
+        qs = super(BestOrphansView, self).get_queryset()
+        return qs.filter(blast_hits__isnull=True)
