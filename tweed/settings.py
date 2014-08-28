@@ -1,5 +1,15 @@
 # Django settings for tweed project.
 
+import os
+from keygen import generate_secret_key
+# Generate SECRET_KEY
+try:
+    from secret_key import *
+except ImportError:
+    SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+    generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
+    from secret_key import *
+
 # Turn this off in produciton
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
